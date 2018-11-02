@@ -1,0 +1,11 @@
+Tavoite tuottaa pelattavia sudokupohjia.
+
+Sudokun muodostaminen
+* 9x9 array
+* Numerot 1-9 vain kerran kullakin rivillä sekä kussakin 3x3 ruudukossa
+* Täytetty sudoku on latinalainen neliö
+** Lisäehtona 3x3 ruudukossa luvut 1-9
+
+Pelilaudan tulostaminen
+* Konsolipohjainen
+* Graafinen
