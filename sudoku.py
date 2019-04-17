@@ -4,6 +4,7 @@ import numpy as np
 import random
 
 
+
 def read_data(path):
     """
     Reads data for sudoku from file.
