@@ -6,7 +6,6 @@ Sudokun muodostaminen
 * Täytetty sudoku on latinalainen neliö
 ** Lisäehtona 3x3 ruudukossa luvut 1-9
 
-
 Sudokun ratkaiseminen:
 * Lataa sudokupohja tiedostosta
 
@@ -14,8 +13,6 @@ Sudokun ratkaiseminen:
 ** Löydä vaakarivit
 ** Löydä pystyrivit
 ** Löydä 3x3 ruudut
-
-
 
 Pelilaudan tulostaminen
 * Konsolipohjainen
