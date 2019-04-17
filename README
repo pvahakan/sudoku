@@ -1,4 +1,4 @@
-Tavoite tuottaa pelattavia sudokupohjia.
+Tavoite tuottaa pelattavia sudokupohjia ja pyrkiä ratkaisemaan niitä.
 
 Sudokun muodostaminen
 * 9x9 array
@@ -6,6 +6,18 @@ Sudokun muodostaminen
 * Täytetty sudoku on latinalainen neliö
 ** Lisäehtona 3x3 ruudukossa luvut 1-9
 
+
+Sudokun ratkaiseminen:
+* Lataa sudokupohja tiedostosta
+
+* Tärkeiden osien etsintä:
+** Löydä vaakarivit
+** Löydä pystyrivit
+** Löydä 3x3 ruudut
+
+
+
 Pelilaudan tulostaminen
 * Konsolipohjainen
 * Graafinen
+
