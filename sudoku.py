@@ -29,6 +29,23 @@ def read_data(path):
     return data
 
 
+def subsquares(sudoku):
+    """
+    Finds 9 subsquares of sudoku.
+
+    :param sudoku: A numpy array, original sudoku.
+    :return subsq: A list of 3x3 subarrays.
+    """
+    subsq = []
+    midpoints = [(1,1), (1,4), (1,7),
+                 (4,1), (4,4), (4,7),
+                 (7,1), (7,4), (7,7)]
+
+    for mp in midpoints:
+        subsq.append(sudoku[ mp[0]-1:mp[0]+2, mp[1]-1:mp[1]+2 ])
+
+    return subsq
+
 
 def console_print(ar):
     """
@@ -67,3 +84,5 @@ if __name__ == "__main__":
 
     sudoku = read_data(easy_sudoku)
     console_print(sudoku)
+    subsq = subsquares(sudoku)
+    print(subsq)
