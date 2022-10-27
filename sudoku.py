@@ -3,8 +3,6 @@
 import numpy as np
 import random
 
-
-
 def read_data(path):
     """
     Reads data for sudoku from file.
@@ -27,43 +25,6 @@ def read_data(path):
                 print("ValueError", scratch[i][j])
 
     return data
-
-
-def subsquares(sudoku):
-    """
-    Finds 9 subsquares of sudoku.
-
-    :param sudoku: A numpy array, original sudoku.
-    :return subsq: A list of 3x3 subarrays.
-    """
-    subsq = []
-    midpoints = [(1,1), (1,4), (1,7),
-                 (4,1), (4,4), (4,7),
-                 (7,1), (7,4), (7,7)]
-
-    for mp in midpoints:
-        subsq.append(sudoku[ mp[0]-1:mp[0]+2, mp[1]-1:mp[1]+2 ])
-
-    return subsq
-
-
-def console_print(ar):
-    """
-    Prints sudoku board to the console.
-
-    :param ar: An array, the board
-    """
-    i, j = 0, 0
-    for i in range(9):
-        for j in range(9):
-            if j == 2 or j == 5:
-                print(int(ar[i][j]), "| ", end="")
-            else:
-                print(int(ar[i][j]), "  ", end="")
-        if i == 2 or i == 5:
-            print("\n---------------------------------")
-        else:
-            print()
 
 
 class SudokuBoard():
@@ -136,7 +97,7 @@ class SudokuBoard():
 
         sbsquare = self.board[ mp[0]-1:mp[0]+2, mp[1]-1:mp[1]+2 ]
 
-        return sbsquare
+        return sbsquare.flatten()
 
     def insert(self, num : int, i : int, j : int):
         """
@@ -145,6 +106,27 @@ class SudokuBoard():
         if 0 < num <= 9:
             self.board[i][j] = num
 
+class SudokuLogic():
+    def __init__(self, board : SudokuBoard):
+        self.board = board
+        self.allowed_modifications = self.find_allowed_modification_locations()
+    
+    def find_allowed_modification_locations(self):
+        coordinates = []
+        for i in range(9):
+            for j in range(9):
+                if self.board.board[i][j] == 0:
+                    coordinates.append((i, j))
+
+        return coordinates
+
+    def is_valid(self, num : int, i : int, j : int):
+        row = self.board.row(i)
+        column = self.board.column(j)
+        subsquare = self.board.subsquare(i, j)
+        if num not in row and num not in column and num not in subsquare:
+            return True
+        return False
 
 if __name__ == "__main__":
     # Paths to sudoku and its solution
@@ -152,7 +134,12 @@ if __name__ == "__main__":
     easy_sudoku_sol = "./solutions/s10a_s.txt"
 
     sudoku = SudokuBoard(read_data(easy_sudoku))
+    sudokulogic = SudokuLogic(sudoku)
     sudoku.print_board()
+    print(sudokulogic.is_valid(5, 0, 4)) # False
+    print(sudokulogic.is_valid(3, 8, 1)) # False
+    print(sudokulogic.is_valid(1, 0, 4)) # True
+    print(sudokulogic.allowed_modifications)
 
 
     # sudoku = read_data(easy_sudoku)
