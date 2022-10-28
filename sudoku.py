@@ -120,10 +120,10 @@ class SudokuLogic():
 
         return coordinates
 
-    def is_valid(self, num : int, i : int, j : int):
-        row = self.board.row(i)
-        column = self.board.column(j)
-        subsquare = self.board.subsquare(i, j)
+    def is_valid(self, num : int, loc : tuple):
+        row = self.board.row(loc[0])
+        column = self.board.column(loc[1])
+        subsquare = self.board.subsquare(loc[0], loc[1])
         if num not in row and num not in column and num not in subsquare:
             return True
         return False
@@ -135,7 +135,8 @@ class SudokuSolver():
         self.locations = self.sudoku.find_allowed_modification_locations()
 
     def solve(self):
-        print(self.locations)
+        for loc in self.locations:
+            print(self.sudoku.is_valid(1, loc))
 
     def solve_2(self):
         self.board.print_board()
