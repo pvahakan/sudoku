@@ -128,18 +128,48 @@ class SudokuLogic():
             return True
         return False
 
+class SudokuSolver():
+    def __init__(self, board : SudokuBoard):
+        self.sudoku = SudokuLogic(board)
+        self.board = board
+        self.locations = self.sudoku.find_allowed_modification_locations()
+
+    def solve(self):
+        print(self.locations)
+
+    def solve_2(self):
+        self.board.print_board()
+        print()
+        for i in range(len(self.sudoku.allowed_modifications)):
+            number = 1
+            allowed_i = self.sudoku.allowed_modifications[i][0]
+            allowed_j = self.sudoku.allowed_modifications[i][1]
+            while not self.sudoku.is_valid(number, allowed_i, allowed_j):
+                number += 1
+                if number > 9:
+                    break
+
+            self.board.insert(number, allowed_i, allowed_j)
+
+        self.board.print_board()
+
 if __name__ == "__main__":
     # Paths to sudoku and its solution
     easy_sudoku = "./sudokus/s10a.txt"
     easy_sudoku_sol = "./solutions/s10a_s.txt"
 
     sudoku = SudokuBoard(read_data(easy_sudoku))
-    sudokulogic = SudokuLogic(sudoku)
-    sudoku.print_board()
-    print(sudokulogic.is_valid(5, 0, 4)) # False
-    print(sudokulogic.is_valid(3, 8, 1)) # False
-    print(sudokulogic.is_valid(1, 0, 4)) # True
-    print(sudokulogic.allowed_modifications)
+    
+
+    sudokusolver = SudokuSolver(sudoku)
+    sudokusolver.solve()
+
+    # sudokulogic = SudokuLogic(sudoku)
+    # sudoku.print_board()
+    # print(sudokulogic.is_valid(5, 0, 4)) # False
+    # print(sudokulogic.is_valid(3, 8, 1)) # False
+    # print(sudokulogic.is_valid(1, 0, 4)) # True
+    # print(sudokulogic.allowed_modifications)
 
 
     # sudoku = read_data(easy_sudoku)
